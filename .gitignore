@@ -1,0 +1,16 @@
+# Node (if npm is added later)
+node_modules/
+dist/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor
+.vscode/
+.idea/
+
+# Env / secrets
+.env
+.env.local

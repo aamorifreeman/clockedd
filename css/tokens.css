@@ -1,0 +1,29 @@
+/* ─── Clocked Design Tokens ─── */
+:root {
+  --bg: #0a0a0a;
+  --p1: #151517;
+  --p2: #1f1f23;
+  --line: #2a2a2e;
+  --ink: #f4f4f0;
+  --mut: #8a8a90;
+  --lime: #caff4d;
+  --pink: #ff5c8a;
+  --purple: #7c5cff;
+  --teal: #3dd6c4;
+  --hot: #ff2d55;
+  --cyan: #5ce1ff;
+  --orange: #ff9f45;
+  --good: #3ddc84;
+  --watch: #ffc24b;
+  --font-display: 'Anton', sans-serif;
+  --font-ui: 'Space Grotesk', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --r-lg: 18px;
+  --r-md: 14px;
+  --r-pill: 999px;
+  --pad: 18px;
+}
+[data-theme="light"] {
+  --bg: #f4f3ed; --p1: #ffffff; --p2: #faf9f4;
+  --line: #ebe9e1; --ink: #17171b; --mut: #8c8b90;
+}
