@@ -21,7 +21,29 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <!-- fallback: if JS crashes before init(), show something -->
+    <div id="js-fallback" style="height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px;font-family:monospace;color:#caff4d;background:#0a0a0a;text-align:center">
+      <div style="font-size:48px">⏱</div>
+      <div style="font-size:22px;font-weight:700">CLOCKED</div>
+      <div style="color:#8a8a90;font-size:13px">loading…</div>
+    </div>
+  </div>
+  <script>
+    // Remove fallback once real JS takes over
+    window.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        var fb = document.getElementById('js-fallback')
+        if (fb && fb.parentNode.children.length === 1) {
+          // still only fallback — JS hasn't replaced it, something crashed
+          fb.innerHTML = '<div style="font-size:32px">⏱</div><div style="font-size:18px;font-weight:700">CLOCKED</div><div style="color:#8a8a90;font-size:12px;margin-top:8px">something went wrong — check console</div>'
+        }
+      }, 5000)
+    })
+    window.onerror = function(msg, src, line) {
+      console.error('Clocked error:', msg, src + ':' + line)
+    }
+  </script>
 
   <!-- Screen renderers (must come before app.js) -->
   <script src="js/screens.js"></script>

@@ -1,12 +1,17 @@
 // ─── Clocked App ─────────────────────────────────────────────────────────────
 // Vanilla JS SPA. Supabase for auth; Plaid in Phase 1.
 
-const { createClient } = supabase
-
-const sb = createClient(
-  'https://luhdlfahkcjrxvklscdr.supabase.co',
-  'sb_publishable_7qzRZk83UT4LBq0WMTf5pA_LY4mT8qL'
-)
+// Supabase client — safe init (CDN may be slow on first load)
+let sb = null
+try {
+  const { createClient } = window.supabase
+  sb = createClient(
+    'https://luhdlfahkcjrxvklscdr.supabase.co',
+    'sb_publishable_7qzRZk83UT4LBq0WMTf5pA_LY4mT8qL'
+  )
+} catch (e) {
+  console.warn('Supabase not available, running in demo-only mode', e)
+}
 
 // ─── State ────────────────────────────────────────────────────────────────────
 let activeTab    = 'home'
@@ -27,6 +32,12 @@ const STORAGE_KEY = 'clocked_onboarded'
 async function init() {
   document.getElementById('app').innerHTML = screenLoading()
   animateLoadBar()
+
+  // If Supabase failed to load, go straight to sign-in
+  if (!sb) {
+    setTimeout(showSignIn, 1400)
+    return
+  }
 
   const { data: { session } } = await sb.auth.getSession()
 
@@ -81,6 +92,7 @@ function showSignIn() {
 }
 
 async function signInGoogle() {
+  if (!sb) return showAuthError('Auth unavailable — use demo mode')
   const btn = document.getElementById('google-btn')
   if (btn) btn.textContent = 'Signing in…'
   const { error } = await sb.auth.signInWithOAuth({
@@ -110,7 +122,7 @@ async function signOut() {
   currentUser = null
   connectedBank = null
   localStorage.removeItem(STORAGE_KEY)
-  if (!demoMode) await sb.auth.signOut().catch(() => {})
+  if (sb) await sb.auth.signOut().catch(() => {})
   showSignIn()
 }
 
