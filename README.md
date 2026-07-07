@@ -2,7 +2,7 @@
 
 **Money, but make it a group chat** — a social budgeting app that turns your spending into budgets, heatmaps, friendly leaderboards, and a monthly "Money Wrapped" recap.
 
-<!-- TODO: add live URL -->
+**Live:** [theclockedapp.netlify.app](https://theclockedapp.netlify.app/)
 
 ## What it is
 
