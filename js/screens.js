@@ -741,4 +741,3 @@ function screenFindCrew(tab = 'create') {
     `}
   </div>`
 }
-}
